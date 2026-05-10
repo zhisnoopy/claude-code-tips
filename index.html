@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude Code · Daily Tips Digest</title>
+<style>
+  :root {
+    --bg: #0d1014;
+    --panel: #151a21;
+    --panel-2: #1c232c;
+    --border: #2a3340;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #d97757;       /* anthropic-ish */
+    --accent-2: #f0a988;
+    --link: #79b8ff;
+    --good: #56d364;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #faf7f2;
+      --panel: #ffffff;
+      --panel-2: #f3ede4;
+      --border: #e2dccf;
+      --text: #1f2328;
+      --muted: #59636e;
+      --accent: #c0532e;
+      --accent-2: #8b3a1c;
+      --link: #0969da;
+      --good: #1a7f37;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    color: var(--text); background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 80px; }
+  header.hero {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px; margin-bottom: 32px;
+  }
+  .eyebrow {
+    color: var(--accent); font-weight: 600; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  h1 { font-size: 34px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); margin: 0 0 16px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+  .meta b { color: var(--text); font-weight: 600; }
+  .meta .dot { width:6px; height:6px; border-radius:50%; background: var(--good); display:inline-block; margin-right:6px; vertical-align: middle; }
+  nav.toc { display:flex; flex-wrap:wrap; gap: 8px; margin: 18px 0 0; }
+  nav.toc a {
+    font-size: 13px; padding: 5px 10px; border:1px solid var(--border); border-radius: 999px;
+    color: var(--muted); text-decoration: none; background: var(--panel);
+  }
+  nav.toc a:hover { color: var(--text); border-color: var(--accent); }
+  section.theme { margin: 36px 0; }
+  section.theme h2 {
+    font-size: 22px; margin: 0 0 4px; letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  section.theme h2 .num {
+    font-size: 12px; color: var(--accent); font-weight: 700;
+    background: var(--panel-2); padding: 2px 8px; border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  section.theme .sub { color: var(--muted); margin: 0 0 18px; font-size: 14px; }
+  .tip {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px; margin: 12px 0;
+  }
+  .tip h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+  .tip p { margin: 0 0 10px; color: var(--text); }
+  .src { display: flex; flex-wrap: wrap; gap: 8px; }
+  .src a {
+    font-size: 12px; color: var(--muted); text-decoration: none;
+    background: var(--panel-2); border: 1px solid var(--border);
+    padding: 3px 9px; border-radius: 999px;
+  }
+  .src a:hover { color: var(--accent); border-color: var(--accent); }
+  .src a:before { content: "↗ "; opacity: 0.6; }
+  .grid { display: grid; gap: 10px; }
+  .grid.repos { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .repo, .post {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 4px;
+    text-decoration: none; color: inherit;
+  }
+  .repo:hover, .post:hover { border-color: var(--accent); }
+  .repo .name { font-weight: 600; font-size: 14px; }
+  .repo .desc { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+  .repo .stars { font-size: 12px; color: var(--accent); }
+  .post .title { font-weight: 500; font-size: 14px; }
+  .post .post-meta { font-size: 12px; color: var(--muted); }
+  footer {
+    margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 12.5px;
+  }
+  footer code { background: var(--panel-2); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  details.sources { margin-top: 14px; }
+  details.sources summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+  details.sources ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+  .badge-stale {
+    display:inline-block; background: #5a3b1a; color: #ffcc88;
+    font-size: 11px; padding: 2px 8px; border-radius: 999px; margin-left: 8px;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .meta .dot.fresh { animation: pulse 2s infinite; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Daily digest · auto-refreshed</div>
+    <h1>Claude Code Tips, Distilled</h1>
+    <p class="lede">A daily-rebuilt summary of the most useful Claude Code workflow tips, harvested from GitHub, Hacker News, blog posts, and X. Synthesized — not just re-listed.</p>
+    <div class="meta" id="meta">Loading…</div>
+    <nav class="toc" id="toc"></nav>
+  </header>
+
+  <main id="themes"></main>
+
+  <section style="margin-top:48px">
+    <h2 style="font-size:22px; margin:0 0 14px;">Trending repos</h2>
+    <div class="grid repos" id="repos"></div>
+  </section>
+
+  <section style="margin-top:36px">
+    <h2 style="font-size:22px; margin:0 0 14px;">Top recent posts &amp; threads</h2>
+    <div class="grid" id="posts"></div>
+  </section>
+
+  <footer>
+    <p>Sources polled today: <span id="sources"></span></p>
+    <p>Page rebuilds daily at 8:00 AM PT via a Hermes Agent cron job. Source data lives in
+       <code>~/claude-code-tips/data/tips.json</code>.</p>
+    <p>Want a different cadence, more sources, or different themes? Tell Hermes:
+       <em>"update the claude-code-tips cron — add devto, change the theme set, refresh twice a day, etc."</em></p>
+  </footer>
+</div>
+
+<script type="application/json" id="data">
+{
+  "generated_at": "2026-05-09T12:20:00-07:00",
+  "generated_at_human": "Saturday, May 9, 2026 at 12:20 PM PT",
+  "next_refresh_human": "Tomorrow at 8:00 AM PT",
+  "sources_polled": [
+    {"name": "Hacker News", "endpoint": "hn.algolia.com/api/v1/search?query=claude+code", "status": "ok", "items": 40},
+    {"name": "GitHub", "endpoint": "api.github.com/search/repositories", "status": "ok", "items": 40},
+    {"name": "Reddit (r/ClaudeAI)", "endpoint": "reddit.com", "status": "blocked-by-network", "items": 0},
+    {"name": "X / Twitter", "endpoint": "via citations in HN/blogs", "status": "indirect", "items": 5},
+    {"name": "Dev blogs", "endpoint": "builder.io, anthropic.com, sshh.io", "status": "partial", "items": 1}
+  ],
+  "themes": [
+    {
+      "id": "context-management",
+      "title": "Context management",
+      "subtitle": "Treat the context window like a budget — top-rated tip across every source.",
+      "tips": [
+        {
+          "headline": "Use /clear between unrelated tasks",
+          "body": "Every time you start something new, clear the chat. Old history eats tokens and forces Claude to run compaction summaries that degrade reasoning. Steve Sewell (builder.io) and ykdojo's tips repo (8.1k★) both rank this #1.",
+          "sources": [
+            {"label": "ykdojo/claude-code-tips · Tip 5/8", "url": "https://github.com/ykdojo/claude-code-tips"},
+            {"label": "builder.io — My best Claude Code tips", "url": "https://www.builder.io/blog/claude-code"}
+          ]
+        },
+        {
+          "headline": "Proactively /compact before you hit the wall",
+          "body": "Don't wait for auto-compaction. Run /compact \"keep only the failing-test traces and the file paths I'm editing\" so the summary keeps what matters. Auto-compaction loses crucial detail.",
+          "sources": [
+            {"label": "ykdojo/claude-code-tips · Tip 8", "url": "https://github.com/ykdojo/claude-code-tips#tip-8-proactively-compact-your-context"}
+          ]
+        },
+        {
+          "headline": "Keep CLAUDE.md short and review it monthly",
+          "body": "Long CLAUDE.md files crowd out task context and contradict themselves. Keep it under ~50 lines: project quirks, build/test commands, conventions. Re-read and prune monthly.",
+          "sources": [
+            {"label": "ykdojo · Tip 30", "url": "https://github.com/ykdojo/claude-code-tips#tip-30-keep-claudemd-simple-and-review-it-periodically"},
+            {"label": "Anthropic — Claude Code best practices", "url": "https://www.anthropic.com/engineering/claude-code-best-practices"}
+          ]
+        },
+        {
+          "headline": "Slim the system prompt by ~50%",
+          "body": "Drop tool descriptions you'll never use (e.g. mcp servers you don't have configured). ykdojo reports cutting the system prompt roughly in half with no quality loss — and a measurable speed boost.",
+          "sources": [{"label": "ykdojo · Tip 15", "url": "https://github.com/ykdojo/claude-code-tips#tip-15-slim-down-the-system-prompt"}]
+        }
+      ]
+    },
+    {
+      "id": "planning-execution",
+      "title": "Plan first, execute second",
+      "subtitle": "The single biggest leverage move per HN front-page consensus.",
+      "tips": [
+        {
+          "headline": "Separate planning from execution",
+          "body": "Run a planning pass (or use Plan Mode) that produces a written plan in markdown before any file edits. Boris Tane's writeup hit #1 on HN with 976 points making this exact case: planning prevents 'first-attempt-95%-garbage' rewrites.",
+          "sources": [
+            {"label": "boristane.com — How I use Claude Code", "url": "https://boristane.com/blog/how-i-use-claude-code/"},
+            {"label": "Sanity — A staff engineer's journey", "url": "https://www.sanity.io/blog/first-attempt-will-be-95-garbage"}
+          ]
+        },
+        {
+          "headline": "Break big problems into A→A1→A2→B steps",
+          "body": "When Claude can't one-shot a task, force decomposition: 'break this into the smallest sub-problems you can independently verify.' Each sub-problem gets its own short context window.",
+          "sources": [{"label": "ykdojo · Tip 3", "url": "https://github.com/ykdojo/claude-code-tips#tip-3-break-down-large-problems-into-smaller-ones"}]
+        },
+        {
+          "headline": "Use 'planning-with-files' (markdown plan persistence)",
+          "body": "OthmanAdi/planning-with-files (20.7k★) is a skill that has Claude write plans to disk, tick boxes as it works, and survive /compact and /clear. Adopted as the standard pattern for multi-hour tasks.",
+          "sources": [{"label": "OthmanAdi/planning-with-files", "url": "https://github.com/OthmanAdi/planning-with-files"}]
+        }
+      ]
+    },
+    {
+      "id": "verification-tdd",
+      "title": "Verification & TDD",
+      "subtitle": "If Claude can't verify, it'll happily lie. Wire up feedback loops.",
+      "tips": [
+        {
+          "headline": "Write tests first; let Claude make them pass",
+          "body": "TDD turns vague specs into machine-checkable contracts. Claude excels at the green→refactor cycle when the red test is hand-written and the failure message is clear.",
+          "sources": [{"label": "ykdojo · Tip 34", "url": "https://github.com/ykdojo/claude-code-tips#tip-34-write-lots-of-tests-and-use-tdd"}]
+        },
+        {
+          "headline": "Always close the write-test cycle for autonomous tasks",
+          "body": "Before walking away from a long-running session, make sure Claude can run the test command itself and observe the output. Without a feedback loop it'll declare victory while broken.",
+          "sources": [{"label": "ykdojo · Tip 9", "url": "https://github.com/ykdojo/claude-code-tips#tip-9-complete-the-write-test-cycle-for-autonomous-tasks"}]
+        },
+        {
+          "headline": "Master multiple verification modes",
+          "body": "Beyond unit tests: have it run the script, screenshot the UI (Chrome integration), curl the endpoint, or diff against golden output. One mode is brittle; three modes catch nearly everything.",
+          "sources": [{"label": "ykdojo · Tip 28", "url": "https://github.com/ykdojo/claude-code-tips#tip-28-mastering-different-ways-of-verifying-its-output"}]
+        }
+      ]
+    },
+    {
+      "id": "workflow-speed",
+      "title": "Day-to-day workflow speed",
+      "subtitle": "Small ergonomic tweaks that compound.",
+      "tips": [
+        {
+          "headline": "Talk to it with your voice",
+          "body": "Local Whisper/Parakeet transcription is faster than typing for instructions. Even with transcription errors Claude reads through them. Built-in voice mode shipped recently; many still prefer local for latency.",
+          "sources": [{"label": "ykdojo · Tip 2", "url": "https://github.com/ykdojo/claude-code-tips#tip-2-talk-to-claude-code-with-your-voice"}]
+        },
+        {
+          "headline": "Customize the status line to show token-usage bar",
+          "body": "Add a context-bar.sh status line showing model + branch + uncommitted file count + token-usage progress bar. Stops you from over-running context unintentionally.",
+          "sources": [{"label": "ykdojo · Tip 0", "url": "https://github.com/ykdojo/claude-code-tips#tip-0-customize-your-status-line"}]
+        },
+        {
+          "headline": "Use git worktrees for parallel branch work",
+          "body": "Spawn one Claude session per worktree so two features can be developed concurrently without context-switching the model. Pairs well with multiple terminal tabs.",
+          "sources": [{"label": "ykdojo · Tip 16", "url": "https://github.com/ykdojo/claude-code-tips#tip-16-git-worktrees-for-parallel-branch-work"}]
+        },
+        {
+          "headline": "Run risky long jobs in containers",
+          "body": "For tasks that could touch your filesystem broadly (large refactors, dependency upgrades), run Claude inside a docker container with the repo mounted. Easy to throw away on bad outcomes.",
+          "sources": [{"label": "ykdojo · Tip 21", "url": "https://github.com/ykdojo/claude-code-tips#tip-21-containers-for-long-running-risky-tasks"}]
+        }
+      ]
+    },
+    {
+      "id": "permissions-safety",
+      "title": "Permissions & safety",
+      "subtitle": "Two camps: 'allow-list everything' vs '--dangerously-skip-permissions'. Pick consciously.",
+      "tips": [
+        {
+          "headline": "Audit your approved-commands list",
+          "body": "Run claude config and review the commands you've blanket-approved. People accumulate Bash(rm:*) and similar by accident. Trim quarterly.",
+          "sources": [{"label": "ykdojo · Tip 33", "url": "https://github.com/ykdojo/claude-code-tips#tip-33-audit-your-approved-commands"}]
+        },
+        {
+          "headline": "If you use --dangerously-skip-permissions, do it in a container or worktree",
+          "body": "Steve Sewell's take: 'Could a rogue agent run a destructive command? Sure. Have I seen it? Never.' But the safer version is to skip permissions only inside a sandboxed worktree or container.",
+          "sources": [{"label": "builder.io blog", "url": "https://www.builder.io/blog/claude-code"}]
+        },
+        {
+          "headline": "Use --allowedTools / --disallowedTools per-session",
+          "body": "For specific runs, narrow the surface: --allowedTools 'Bash(git:*)' 'Write' --disallowedTools 'Bash(rm:*)' 'Bash(sudo:*)'. Reduces surprise prompts without going fully YOLO.",
+          "sources": [{"label": "Njengah/claude-code-cheat-sheet", "url": "https://github.com/Njengah/claude-code-cheat-sheet"}]
+        }
+      ]
+    },
+    {
+      "id": "extending",
+      "title": "Skills, sub-agents, and MCP",
+      "subtitle": "Where Claude Code differentiates from competitors.",
+      "tips": [
+        {
+          "headline": "Know the four extension surfaces",
+          "body": "CLAUDE.md = always-loaded preferences. Skills = LLM-loaded procedures (markdown). Slash commands = user-typed shortcuts. Plugins = bundled hooks+commands+skills. Don't conflate them — pick the lightest one that fits.",
+          "sources": [{"label": "ykdojo · Tip 25", "url": "https://github.com/ykdojo/claude-code-tips#tip-25-understanding-claudemd-vs-skills-vs-slash-commands-vs-plugins"}]
+        },
+        {
+          "headline": "Adopt one curated subagent collection rather than rolling your own",
+          "body": "VoltAgent/awesome-claude-code-subagents (19.5k★) ships 100+ specialist agents (security-reviewer, refactorer, sql-tuner). Cheaper than reinventing.",
+          "sources": [{"label": "VoltAgent/awesome-claude-code-subagents", "url": "https://github.com/VoltAgent/awesome-claude-code-subagents"}]
+        },
+        {
+          "headline": "Install the dx plugin for one-shot ergonomics",
+          "body": "ykdojo's dx plugin bundles status line, context bar, common slash commands, and worktree helpers in one install — reasonable starting kit if you don't want to assemble manually.",
+          "sources": [{"label": "ykdojo · Tip 44", "url": "https://github.com/ykdojo/claude-code-tips#tip-44-install-the-dx-plugin"}]
+        },
+        {
+          "headline": "Use a context-reduction MCP server to slash token bills",
+          "body": "mksg.lu/blog/context-mode reports an MCP server that cuts Claude Code context consumption by 98% on large repos by lazy-loading file contents. Front-paged HN with 570 points last quarter.",
+          "sources": [{"label": "mksg.lu — Context Mode MCP", "url": "https://mksg.lu/blog/context-mode"}]
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes",
+      "title": "Common mistakes (per HN/Reddit threads)",
+      "tips": [
+        {
+          "headline": "Over-broad prompts in massive repos",
+          "body": "'Refactor the auth system' against a 200k-line monorepo will burn tokens before producing anything. Always scope: 'in src/auth/middleware/ only, ...'",
+          "sources": [{"label": "Sanity blog (96% garbage)", "url": "https://www.sanity.io/blog/first-attempt-will-be-95-garbage"}]
+        },
+        {
+          "headline": "Letting one long session run for hours",
+          "body": "After ~3 hours the conversation drifts. Multiple HN threads flag this. Branch off with /clear (or fork the conversation) when context starts feeling stale.",
+          "sources": [{"label": "ykdojo · Tip 23", "url": "https://github.com/ykdojo/claude-code-tips#tip-23-clonefork-and-half-clone-conversations"}]
+        },
+        {
+          "headline": "Skipping git commit between Claude steps",
+          "body": "Commit after every meaningful Claude-generated diff. It's the cheapest undo and the cheapest checkpoint to feed back as 'what changed since X' for the next prompt.",
+          "sources": [{"label": "ykdojo · Tip 4", "url": "https://github.com/ykdojo/claude-code-tips#tip-4-using-git-and-github-cli-like-a-pro"}]
+        }
+      ]
+    }
+  ],
+  "trending_repos": [
+    {"name": "anthropics/claude-code", "stars": 122045, "desc": "Official CLI", "url": "https://github.com/anthropics/claude-code"},
+    {"name": "ComposioHQ/awesome-claude-skills", "stars": 58971, "desc": "Curated Skills list", "url": "https://github.com/ComposioHQ/awesome-claude-skills"},
+    {"name": "ruvnet/ruflo", "stars": 47860, "desc": "Multi-agent swarm orchestration", "url": "https://github.com/ruvnet/ruflo"},
+    {"name": "hesreallyhim/awesome-claude-code", "stars": 43170, "desc": "The canonical awesome list", "url": "https://github.com/hesreallyhim/awesome-claude-code"},
+    {"name": "sickn33/antigravity-awesome-skills", "stars": 36972, "desc": "1,400+ installable skills + CLI", "url": "https://github.com/sickn33/antigravity-awesome-skills"},
+    {"name": "OthmanAdi/planning-with-files", "stars": 20766, "desc": "Manus-style markdown planning skill", "url": "https://github.com/OthmanAdi/planning-with-files"},
+    {"name": "VoltAgent/awesome-claude-code-subagents", "stars": 19462, "desc": "100+ specialized subagents", "url": "https://github.com/VoltAgent/awesome-claude-code-subagents"},
+    {"name": "Donchitos/Claude-Code-Game-Studios", "stars": 17891, "desc": "49 agents + 72 workflow skills for game dev", "url": "https://github.com/Donchitos/Claude-Code-Game-Studios"},
+    {"name": "travisvn/awesome-claude-skills", "stars": 12329, "desc": "Curated Claude Skills list", "url": "https://github.com/travisvn/awesome-claude-skills"},
+    {"name": "ykdojo/claude-code-tips", "stars": 8180, "desc": "45 actionable tips, basics→advanced", "url": "https://github.com/ykdojo/claude-code-tips"},
+    {"name": "zebbern/claude-code-guide", "stars": 4097, "desc": "Beginner→power-user reference", "url": "https://github.com/zebbern/claude-code-guide"},
+    {"name": "Njengah/claude-code-cheat-sheet", "stars": 1691, "desc": "10-level cheat sheet", "url": "https://github.com/Njengah/claude-code-cheat-sheet"}
+  ],
+  "trending_posts": [
+    {"title": "Claude Code's source code leaked via NPM map file", "points": 2095, "comments": 1022, "url": "https://alex000kim.com/posts/2026-03-31-claude-code-source-leak/", "source": "Hacker News"},
+    {"title": "Cowork: Claude Code for the rest of your work", "points": 1298, "comments": 565, "url": "https://claude.com/blog/cowork-research-preview", "source": "Anthropic"},
+    {"title": "Claude Code Unpacked: A visual guide", "points": 1128, "comments": 400, "url": "https://ccunpacked.dev/", "source": "ccunpacked.dev"},
+    {"title": "How I use Claude Code: separation of planning and execution", "points": 976, "comments": 591, "url": "https://boristane.com/blog/how-i-use-claude-code/", "source": "boristane.com"},
+    {"title": "Anthropic engineering — April 23 postmortem", "points": 942, "comments": 732, "url": "https://www.anthropic.com/engineering/april-23-postmortem", "source": "Anthropic"},
+    {"title": "Using Claude Code to modernize a 25-year-old kernel driver", "points": 929, "comments": 318, "url": "https://dmitrybrant.com/2025/09/07/using-claude-code-to-modernize-a-25-year-old-kernel-driver", "source": "dmitrybrant.com"},
+    {"title": "Claude Code Cheat Sheet (cc.storyfox.cz)", "points": 699, "comments": 188, "url": "https://cc.storyfox.cz", "source": "storyfox"},
+    {"title": "Claude Code: Best practices for agentic coding", "points": 614, "comments": 257, "url": "https://www.anthropic.com/engineering/claude-code-best-practices", "source": "Anthropic"},
+    {"title": "What Claude Code chooses (model behavior study)", "points": 611, "comments": 235, "url": "https://amplifying.ai/research/claude-code-picks", "source": "amplifying.ai"},
+    {"title": "How I use every Claude Code feature", "points": 534, "comments": 188, "url": "https://blog.sshh.io/p/how-i-use-every-claude-code-feature", "source": "sshh.io"},
+    {"title": "MCP server that reduces context consumption by 98%", "points": 570, "comments": 107, "url": "https://mksg.lu/blog/context-mode", "source": "mksg.lu"},
+    {"title": "The creator of Claude Code's Claude setup", "points": 568, "comments": 403, "url": "https://twitter.com/bcherny/status/2007179832300581177", "source": "X (Twitter)"}
+  ]
+}
+
+</script>
+<script>
+(async () => {
+  const $ = (s, r=document) => r.querySelector(s);
+  const el = (tag, attrs={}, kids=[]) => {
+    const e = document.createElement(tag);
+    for (const [k,v] of Object.entries(attrs)) {
+      if (k === 'class') e.className = v;
+      else if (k === 'html') e.innerHTML = v;
+      else e.setAttribute(k, v);
+    }
+    for (const k of [].concat(kids)) {
+      if (k == null) continue;
+      e.appendChild(typeof k === 'string' ? document.createTextNode(k) : k);
+    }
+    return e;
+  };
+
+  let data;
+  try {
+    // Inline JSON (works from file://). Falls back to network fetch if absent.
+    const inline = document.getElementById('data');
+    if (inline && inline.textContent.trim().length > 2) {
+      data = JSON.parse(inline.textContent);
+    } else {
+      const r = await fetch('data/tips.json?t=' + Date.now());
+      data = await r.json();
+    }
+  } catch (e) {
+    $('#meta').textContent = 'Failed to load tips data: ' + e.message;
+    return;
+  }
+
+  // ---- Header meta
+  const generated = new Date(data.generated_at);
+  const ageHours = (Date.now() - generated.getTime()) / 3.6e6;
+  const stale = ageHours > 36;
+  const dotClass = stale ? 'dot' : 'dot fresh';
+  $('#meta').innerHTML = '';
+  $('#meta').appendChild(el('span', {html: `<span class="${dotClass}"></span><b>${data.generated_at_human}</b>`}));
+  $('#meta').appendChild(el('span', {html: `Next refresh: <b>${data.next_refresh_human}</b>`}));
+  $('#meta').appendChild(el('span', {html: `<b>${data.themes.length}</b> themes · <b>${
+      data.themes.reduce((n,t)=>n+t.tips.length,0)
+    }</b> tips · <b>${data.trending_repos.length}</b> repos`}));
+  if (stale) $('#meta').appendChild(el('span', {class: 'badge-stale'}, 'data is >36h old'));
+
+  // ---- TOC
+  const toc = $('#toc');
+  data.themes.forEach(t => toc.appendChild(el('a', {href:'#'+t.id}, t.title)));
+
+  // ---- Themes
+  const main = $('#themes');
+  data.themes.forEach((theme, i) => {
+    const sec = el('section', {class:'theme', id: theme.id});
+    sec.appendChild(el('h2', {}, [
+      el('span', {class:'num'}, String(i+1).padStart(2,'0')),
+      theme.title
+    ]));
+    if (theme.subtitle) sec.appendChild(el('p', {class:'sub'}, theme.subtitle));
+    theme.tips.forEach(tip => {
+      const card = el('div', {class:'tip'});
+      card.appendChild(el('h3', {}, tip.headline));
+      card.appendChild(el('p', {}, tip.body));
+      if (tip.sources && tip.sources.length) {
+        const srcs = el('div', {class:'src'});
+        tip.sources.forEach(s => {
+          srcs.appendChild(el('a', {href: s.url, target:'_blank', rel:'noopener'}, s.label));
+        });
+        card.appendChild(srcs);
+      }
+      sec.appendChild(card);
+    });
+    main.appendChild(sec);
+  });
+
+  // ---- Repos
+  const reposDiv = $('#repos');
+  data.trending_repos.forEach(r => {
+    const card = el('a', {class:'repo', href: r.url, target:'_blank', rel:'noopener'});
+    card.appendChild(el('div', {class:'name'}, r.name));
+    card.appendChild(el('div', {class:'desc'}, r.desc || ''));
+    card.appendChild(el('div', {class:'stars'}, '★ ' + r.stars.toLocaleString()));
+    reposDiv.appendChild(card);
+  });
+
+  // ---- Posts
+  const postsDiv = $('#posts');
+  data.trending_posts.forEach(p => {
+    const card = el('a', {class:'post', href: p.url, target:'_blank', rel:'noopener'});
+    card.appendChild(el('div', {class:'title'}, p.title));
+    const m = [];
+    if (p.source) m.push(p.source);
+    if (p.points != null) m.push('▲ ' + p.points);
+    if (p.comments != null) m.push('💬 ' + p.comments);
+    card.appendChild(el('div', {class:'post-meta'}, m.join('  ·  ')));
+    postsDiv.appendChild(card);
+  });
+
+  // ---- Sources line
+  $('#sources').textContent = data.sources_polled.map(s =>
+    `${s.name} (${s.status === 'ok' ? s.items + ' items' : s.status})`
+  ).join(' · ');
+})();
+</script>
+</body>
+</html>
