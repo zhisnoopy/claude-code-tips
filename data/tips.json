@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-11T10:20:23-07:00",
-  "generated_at_human": "Monday, May 11, 2026 at 10:20 AM PT",
+  "generated_at": "2026-05-12T10:03:34-07:00",
+  "generated_at_human": "Tuesday, May 12, 2026 at 10:03 AM PT",
   "next_refresh_human": "Tomorrow at 8:00 AM PT",
   "sources_polled": [
     {
@@ -339,85 +339,85 @@
   "trending_repos": [
     {
       "name": "affaan-m/everything-claude-code",
-      "stars": 179350,
+      "stars": 180303,
       "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "url": "https://github.com/affaan-m/everything-claude-code"
     },
     {
       "name": "forrestchang/andrej-karpathy-skills",
-      "stars": 125045,
+      "stars": 126689,
       "desc": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "url": "https://github.com/forrestchang/andrej-karpathy-skills"
     },
     {
       "name": "anthropics/claude-code",
-      "stars": 122540,
+      "stars": 122855,
       "desc": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
       "url": "https://github.com/anthropics/claude-code"
     },
     {
       "name": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "stars": 76894,
+      "stars": 77442,
       "desc": "An AI SKILL that provide design intelligence for building professional UI/UX multiple platforms",
       "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
     },
     {
       "name": "farion1231/cc-switch",
-      "stars": 67197,
+      "stars": 68530,
       "desc": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Gemini CLI & Hermes Agent. Only official website: ccswitch.io",
       "url": "https://github.com/farion1231/cc-switch"
     },
     {
       "name": "ComposioHQ/awesome-claude-skills",
-      "stars": 59244,
+      "stars": 59411,
       "desc": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills"
     },
     {
       "name": "JuliusBrussee/caveman",
-      "stars": 58185,
+      "stars": 58857,
       "desc": "🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman",
       "url": "https://github.com/JuliusBrussee/caveman"
     },
     {
       "name": "ruvnet/ruflo",
-      "stars": 48957,
+      "stars": 49581,
       "desc": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features    enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
       "url": "https://github.com/ruvnet/ruflo"
     },
     {
       "name": "safishamsi/graphify",
-      "stars": 46572,
+      "stars": 47133,
       "desc": "AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. App code + database schema + infrastructure in one graph.",
       "url": "https://github.com/safishamsi/graphify"
     },
     {
-      "name": "jeecgboot/JeecgBoot",
-      "stars": 46184,
-      "desc": "AI低代码平台，支持「低代码 + 零代码」双模式：零代码 5 分钟搭建业务系统，低代码模式一键生成前后端代码。 内置AI 应用，支持AI聊天、知识库、流程编排、MCP与插件，支持各种模型。Skills能力实现：一句话画流程图、设计表单、生成系统。 引领 AI生成→在线配置→代码生成→手工合并的开发模式，解决Java项目80%的重复工作，快速提高效率，又不失灵活性。",
-      "url": "https://github.com/jeecgboot/JeecgBoot"
-    },
-    {
       "name": "rtk-ai/rtk",
-      "stars": 46001,
+      "stars": 46619,
       "desc": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies",
       "url": "https://github.com/rtk-ai/rtk"
     },
     {
+      "name": "jeecgboot/JeecgBoot",
+      "stars": 46204,
+      "desc": "AI低代码平台，支持「低代码 + 零代码」双模式：零代码 5 分钟搭建业务系统，低代码模式一键生成前后端代码。 内置AI 应用，支持AI聊天、知识库、流程编排、MCP与插件，支持各种模型。Skills能力实现：一句话画流程图、设计表单、生成系统。 引领 AI生成→在线配置→代码生成→手工合并的开发模式，解决Java项目80%的重复工作，快速提高效率，又不失灵活性。",
+      "url": "https://github.com/jeecgboot/JeecgBoot"
+    },
+    {
       "name": "CherryHQ/cherry-studio",
-      "stars": 45467,
+      "stars": 45517,
       "desc": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
       "url": "https://github.com/CherryHQ/cherry-studio"
     },
     {
       "name": "santifer/career-ops",
-      "stars": 44061,
+      "stars": 44249,
       "desc": "AI-powered job search system built on Claude Code. 14 skill modes, Go dashboard, PDF generation, batch processing.",
       "url": "https://github.com/santifer/career-ops"
     },
     {
       "name": "hesreallyhim/awesome-claude-code",
-      "stars": 43377,
+      "stars": 43501,
       "desc": "A curated list of awesome skills, hooks, slash-commands, agent orchestrators, applications, and plugins for Claude Code by Anthropic",
       "url": "https://github.com/hesreallyhim/awesome-claude-code"
     }
