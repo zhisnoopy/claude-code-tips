@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-05T10:02:12-07:00",
-  "generated_at_human": "Saturday, September 5, 2026 at 10:02 AM PT",
+  "generated_at": "2026-09-06T10:25:53-07:00",
+  "generated_at_human": "Sunday, September 6, 2026 at 10:25 AM PT",
   "next_refresh_human": "Tomorrow at 8:00 AM PT",
   "sources_polled": [
     {
@@ -13,7 +13,7 @@
       "name": "Hacker News",
       "endpoint": "hn.algolia.com/api/v1/search",
       "status": "ok",
-      "items": 6
+      "items": 5
     },
     {
       "name": "Reddit (r/ClaudeAI)",
@@ -339,85 +339,85 @@
   "trending_repos": [
     {
       "name": "affaan-m/ECC",
-      "stars": 249454,
+      "stars": 250859,
       "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "url": "https://github.com/affaan-m/ECC"
     },
     {
       "name": "multica-ai/andrej-karpathy-skills",
-      "stars": 210334,
+      "stars": 210558,
       "desc": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "url": "https://github.com/multica-ai/andrej-karpathy-skills"
     },
     {
       "name": "anthropics/claude-code",
-      "stars": 144149,
+      "stars": 144248,
       "desc": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
       "url": "https://github.com/anthropics/claude-code"
     },
     {
       "name": "farion1231/cc-switch",
-      "stars": 131192,
+      "stars": 131338,
       "desc": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Grok Build & Hermes Agent. Only official website: ccswitch.io",
       "url": "https://github.com/farion1231/cc-switch"
     },
     {
       "name": "nextlevelbuilder/ui-ux-pro-max-skill",
-      "stars": 125214,
+      "stars": 125470,
       "desc": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
       "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
     },
     {
       "name": "Graphify-Labs/graphify",
-      "stars": 114984,
+      "stars": 115264,
       "desc": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
       "url": "https://github.com/Graphify-Labs/graphify"
     },
     {
       "name": "JuliusBrussee/caveman",
-      "stars": 103764,
+      "stars": 103900,
       "desc": "🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman",
       "url": "https://github.com/JuliusBrussee/caveman"
     },
     {
       "name": "addyosmani/agent-skills",
-      "stars": 92396,
+      "stars": 92544,
       "desc": "Production-grade engineering skills for AI coding agents.",
       "url": "https://github.com/addyosmani/agent-skills"
     },
     {
       "name": "Leonxlnx/taste-skill",
-      "stars": 84545,
+      "stars": 84826,
       "desc": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop",
       "url": "https://github.com/Leonxlnx/taste-skill"
     },
     {
       "name": "rtk-ai/rtk",
-      "stars": 78771,
+      "stars": 79068,
       "desc": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies",
       "url": "https://github.com/rtk-ai/rtk"
     },
     {
       "name": "ComposioHQ/awesome-claude-skills",
-      "stars": 74518,
+      "stars": 74587,
       "desc": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills"
     },
     {
       "name": "ruvnet/ruflo",
-      "stars": 70615,
+      "stars": 70894,
       "desc": "🌊 The original agent meta-harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
       "url": "https://github.com/ruvnet/ruflo"
     },
     {
       "name": "mvanhorn/last30days-skill",
-      "stars": 61298,
+      "stars": 61420,
       "desc": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
       "url": "https://github.com/mvanhorn/last30days-skill"
     },
     {
       "name": "hesreallyhim/awesome-claude-code",
-      "stars": 53554,
+      "stars": 53593,
       "desc": "A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code, the undisputed champion of coding companions, from the unstoppable team at Anthropic PBC. A delectable showcase of top tier skills, ambidextrous agents, scintillating status lines, top notch developer tooling, and also we have plugins",
       "url": "https://github.com/hesreallyhim/awesome-claude-code"
     }
@@ -450,13 +450,6 @@
       "comments": 715,
       "url": "https://antoine.fi/mri-analysis-using-claude-code-opus",
       "source": "antoine.fi"
-    },
-    {
-      "title": "Using Claude Code: The unreasonable effectiveness of HTML",
-      "points": 528,
-      "comments": 274,
-      "url": "https://twitter.com/trq212/status/2052809885763747935",
-      "source": "X (Twitter)"
     },
     {
       "title": "Microsoft starts canceling Claude Code licenses",
